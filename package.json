@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "DEBUG=dice:* next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,12 +12,17 @@
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "axios": "^0.27.2",
+    "axios-logger": "^2.6.1",
+    "debug": "^4.3.4",
     "framer-motion": "^6.5.1",
     "next": "12.2.2",
+    "next-connect": "^1.0.0-next.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
     "@types/node": "18.0.4",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
