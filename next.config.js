@@ -6,6 +6,10 @@ const nextConfig = {
   images: {
     domains: ["dice-media.imgix.net"],
   },
+  i18n: {
+    locales: ["en-GB", "en-US"],
+    defaultLocale: "en-GB",
+  },
 };
 
 module.exports = nextConfig;

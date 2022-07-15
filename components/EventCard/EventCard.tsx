@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import MoreInfo from "components/EventCard/MoreInfo";
 import dayjs from "lib/dayjs";
 import Image from "next/image";
 import { FC } from "react";
@@ -36,6 +37,7 @@ const OnSale = chakra(Badge, {
     fontSize: "0.8em",
     bg: "blackAlpha.900",
     position: "absolute",
+    textTransform: "none",
   },
 });
 
@@ -48,6 +50,7 @@ const EventCard: FC<Props> = ({ event }) => {
     name,
     venue,
     cities,
+    description,
     event_images: images,
     spotify_tracks: spotify,
     apple_music_tracks: apple,
@@ -57,11 +60,14 @@ const EventCard: FC<Props> = ({ event }) => {
   const start = dayjs(startDate);
   const city = cities[0]?.name;
   const audio = !!(spotify.length + apple.length);
-  // TODO: remove - time travel so we can see some on sale dates
-  const onSale = start.isAfter(dayjs("2022-04-01"));
+  // TODO: remove hard coded now
+  const showOnSale = start.isAfter(
+    dayjs("2022-04-01" /* time travel so we can see some on sale dates */)
+  );
 
   return (
     <VStack align="start">
+      {/* extract to EventCardHead (name tbd) */}
       <Box w="100%" position="relative" bg="black">
         <AspectRatio w="100%" ratio={375 / 225}>
           <Image alt={name} layout="fill" src={images.landscape} />
@@ -71,7 +77,7 @@ const EventCard: FC<Props> = ({ event }) => {
             <Icon as={PlayIcon} boxSize="40px" />
           </Play>
         )}
-        {onSale && <OnSale>{start.format("LL - LT")}</OnSale>}
+        {showOnSale && <OnSale>On sale {start.format("LL - LT")}</OnSale>}
       </Box>
       <VStack spacing={0} align="start">
         <Text fontSize="xl" fontWeight="bold">
@@ -80,6 +86,7 @@ const EventCard: FC<Props> = ({ event }) => {
         <Text fontWeight="bold">{venue}</Text>
         {city && <Text>{city}</Text>}
       </VStack>
+      <MoreInfo event={event} />
     </VStack>
   );
 };

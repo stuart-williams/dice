@@ -16,13 +16,36 @@ export interface City {
   name: string;
 }
 
+export interface LineupItem {
+  time: string;
+  details: string;
+}
+
+export interface TicketPrice {
+  fees: number;
+  total: number;
+  face_value: number;
+}
+
+export interface Ticket {
+  id: number;
+  name: string;
+  sold_put: boolean;
+  price: TicketPrice;
+}
+
 export interface Event {
   id: string;
   name: string;
   date: string;
   venue: string;
   cities: City[];
+  currency: string;
+  date_end: string;
   featured: boolean;
+  description: string;
+  lineup: LineupItem[];
+  ticket_types: Ticket[];
   sale_start_date: string;
   spotify_tracks: Track[];
   event_images: EventImage;
