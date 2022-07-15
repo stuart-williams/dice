@@ -40,6 +40,7 @@ export interface Event {
   date: string;
   venue: string;
   cities: City[];
+  timezone: string;
   currency: string;
   date_end: string;
   featured: boolean;

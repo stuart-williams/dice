@@ -16,6 +16,7 @@ const EventCard: FC<Props> = ({ event }) => {
     venue,
     cities,
     lineup,
+    timezone,
     currency,
     description,
     date_end: endDate,
@@ -34,13 +35,14 @@ const EventCard: FC<Props> = ({ event }) => {
         spotifyTracks={spotifyTracks}
         appleMusicTracks={appleMusicTracks}
       >
-        <OnSaleBadge onSaleDate={onSaleDate} />
+        <OnSaleBadge timezone={timezone} onSaleDate={onSaleDate} />
       </Media>
       <Header name={name} venue={venue} city={cities[0]?.name} />
       <Content
         lineup={lineup}
         tickets={tickets}
         endDate={endDate}
+        timezone={timezone}
         currency={currency}
         description={description}
       />

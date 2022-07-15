@@ -26,6 +26,7 @@ const SectionTitle = chakra(Text, {
 interface Props {
   endDate: string;
   currency: string;
+  timezone: string;
   description: string;
   tickets: Api.Ticket[];
   lineup: Api.LineupItem[];
@@ -36,6 +37,7 @@ const Content: FC<Props> = ({
   endDate,
   tickets,
   currency,
+  timezone,
   description,
 }) => {
   const formatTicketPrice = useFormatTicketPrice();
@@ -61,7 +63,7 @@ const Content: FC<Props> = ({
               {/* don't want to replace curfew in lineup because there are artists called Curfew! */}
               {!lineup.find(({ details }) => details.includes("Curfew")) && (
                 <ListItem>
-                  Curfew - <b>{dayjs(endDate).format("LT")}</b>
+                  Curfew - <b>{dayjs.tz(endDate, timezone).format("LT")}</b>
                 </ListItem>
               )}
             </List>

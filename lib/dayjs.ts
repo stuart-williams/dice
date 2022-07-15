@@ -1,7 +1,11 @@
 import dayjs from "dayjs";
 import "dayjs/locale/en-gb";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 
 // map sensible locales to dayjs locales

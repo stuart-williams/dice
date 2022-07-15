@@ -17,11 +17,12 @@ const OnSale = chakra(Badge, {
 });
 
 interface Props {
+  timezone: string;
   onSaleDate: string;
 }
 
-const OnSaleBadge: FC<Props> = ({ onSaleDate }) => {
-  const onSale = dayjs(onSaleDate);
+const OnSaleBadge: FC<Props> = ({ timezone, onSaleDate }) => {
+  const onSale = dayjs.tz(onSaleDate, timezone);
 
   // TODO: remove hard coded now
   if (
