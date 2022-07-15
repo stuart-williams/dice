@@ -24,18 +24,20 @@ const SectionTitle = chakra(Text, {
 });
 
 interface Props {
-  event: Api.Event;
+  endDate: string;
+  currency: string;
+  description: string;
+  tickets: Api.Ticket[];
+  lineup: Api.LineupItem[];
 }
 
-const MoreInfo: FC<Props> = ({ event }) => {
-  const {
-    lineup,
-    currency,
-    description,
-    date_end: endDate,
-    ticket_types: tickets,
-  } = event;
-
+const EventCardContent: FC<Props> = ({
+  lineup,
+  endDate,
+  tickets,
+  currency,
+  description,
+}) => {
   const formatTicketPrice = useFormatTicketPrice();
 
   return (
@@ -49,26 +51,17 @@ const MoreInfo: FC<Props> = ({ event }) => {
         </AccordionButton>
         <AccordionPanel>
           <VStack align="start">
-            {/* 
-               There are some long descriptions which are pretty ugly inline + push the lineup etc.
-               pretty far down the page. Would want to add a "read more" or similar to make the 
-               full description visible.
-            */}
+            {/* TODO: read more on truncated description */}
             <Text noOfLines={8}>{description}</Text>
             <SectionTitle>Line Up</SectionTitle>
             <List spacing={1}>
               {lineup.map(({ details }) => (
                 <ListItem key={details}>{details}</ListItem>
               ))}
-              {/*
-                 Show curfew time when lineup doesn't contain it. I was origionally going to remove
-                 items contaning "Curfew" from the lineup but I know there are artists named Curfew!
-               */}
+              {/* don't want to replace curfew in lineup because there are artists called Curfew! */}
               {!lineup.find(({ details }) => details.includes("Curfew")) && (
                 <ListItem>
-                  <Text>
-                    Curfew - <b>{dayjs(endDate).format("LT")}</b>
-                  </Text>
+                  Curfew - <b>{dayjs(endDate).format("LT")}</b>
                 </ListItem>
               )}
             </List>
@@ -76,7 +69,7 @@ const MoreInfo: FC<Props> = ({ event }) => {
             <List spacing={1}>
               {tickets.map(({ id, name, price }) => (
                 <ListItem key={id}>
-                  {name} - <b>{formatTicketPrice(price, currency)}</b>
+                  {name} - <b>{formatTicketPrice(price, currency)}</b>{" "}
                 </ListItem>
               ))}
             </List>
@@ -87,4 +80,4 @@ const MoreInfo: FC<Props> = ({ event }) => {
   );
 };
 
-export default MoreInfo;
+export default EventCardContent;

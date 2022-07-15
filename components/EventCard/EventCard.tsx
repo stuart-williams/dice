@@ -1,31 +1,10 @@
-import {
-  AspectRatio,
-  Badge,
-  Box,
-  Center,
-  chakra,
-  Icon,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import MoreInfo from "components/EventCard/MoreInfo";
+import { Badge, chakra, VStack } from "@chakra-ui/react";
 import dayjs from "lib/dayjs";
-import Image from "next/image";
 import { FC } from "react";
-import { BiPlay as PlayIcon } from "react-icons/bi";
 import type * as Api from "types/api";
-
-const Play = chakra(Center, {
-  baseStyle: {
-    left: 0,
-    bottom: 0,
-    h: "50px",
-    w: "50px",
-    color: "white",
-    bg: "blackAlpha.700",
-    position: "absolute",
-  },
-});
+import Content from "./EventCardContent";
+import Header from "./EventCardHeader";
+import Media from "./EventCardMedia";
 
 const OnSale = chakra(Badge, {
   baseStyle: {
@@ -50,43 +29,41 @@ const EventCard: FC<Props> = ({ event }) => {
     name,
     venue,
     cities,
+    lineup,
+    currency,
     description,
+    date_end: endDate,
     event_images: images,
-    spotify_tracks: spotify,
-    apple_music_tracks: apple,
-    sale_start_date: startDate,
+    ticket_types: tickets,
+    sale_start_date: onSaleDate,
+    spotify_tracks: spotifyTracks,
+    apple_music_tracks: appleMusicTracks,
   } = event;
 
-  const start = dayjs(startDate);
-  const city = cities[0]?.name;
-  const audio = !!(spotify.length + apple.length);
+  const onSale = dayjs(onSaleDate);
   // TODO: remove hard coded now
-  const showOnSale = start.isAfter(
+  const showOnSale = onSale.isAfter(
     dayjs("2022-04-01" /* time travel so we can see some on sale dates */)
   );
 
   return (
     <VStack align="start">
-      {/* extract to EventCardHead (name tbd) */}
-      <Box w="100%" position="relative" bg="black">
-        <AspectRatio w="100%" ratio={375 / 225}>
-          <Image alt={name} layout="fill" src={images.landscape} />
-        </AspectRatio>
-        {audio && (
-          <Play>
-            <Icon as={PlayIcon} boxSize="40px" />
-          </Play>
-        )}
-        {showOnSale && <OnSale>On sale {start.format("LL - LT")}</OnSale>}
-      </Box>
-      <VStack spacing={0} align="start">
-        <Text fontSize="xl" fontWeight="bold">
-          {name}
-        </Text>
-        <Text fontWeight="bold">{venue}</Text>
-        {city && <Text>{city}</Text>}
-      </VStack>
-      <MoreInfo event={event} />
+      <Media
+        name={name}
+        images={images}
+        spotifyTracks={spotifyTracks}
+        appleMusicTracks={appleMusicTracks}
+      >
+        {showOnSale && <OnSale>On sale {onSale.format("LL - LT")}</OnSale>}
+      </Media>
+      <Header name={name} venue={venue} city={cities[0]?.name} />
+      <Content
+        lineup={lineup}
+        tickets={tickets}
+        endDate={endDate}
+        currency={currency}
+        description={description}
+      />
     </VStack>
   );
 };

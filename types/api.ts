@@ -30,7 +30,7 @@ export interface TicketPrice {
 export interface Ticket {
   id: number;
   name: string;
-  sold_put: boolean;
+  sold_out: boolean;
   price: TicketPrice;
 }
 
