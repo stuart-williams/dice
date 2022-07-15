@@ -24,7 +24,13 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
   });
 
   return (
-    <Container py={8} as={VStack}>
+    <Container
+      py={8}
+      spacing={8}
+      as={VStack}
+      align="stretch"
+      maxW="container.lg"
+    >
       <ListOfEvents events={events} />
       {canLoadMore && (
         <Button isLoading={isLoading} onClick={loadMore}>

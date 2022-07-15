@@ -1,4 +1,5 @@
-import { List, ListItem } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
+import EventCard from "components/EventCard";
 import { FC } from "react";
 import type * as Api from "types/api";
 
@@ -7,11 +8,11 @@ interface Props {
 }
 
 const ListOfEvents: FC<Props> = ({ events }) => (
-  <List>
-    {events.map(({ id, name }) => (
-      <ListItem key={id}>{name}</ListItem>
+  <SimpleGrid spacing={8} columns={{ base: 1, sm: 2, lg: 3 }}>
+    {events.map((event) => (
+      <EventCard key={event.id} event={event} />
     ))}
-  </List>
+  </SimpleGrid>
 );
 
 export default ListOfEvents;

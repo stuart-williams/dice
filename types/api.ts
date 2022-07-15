@@ -4,6 +4,13 @@ export interface Track {
   preview_url: string;
 }
 
+export interface EventImage {
+  brand?: string;
+  aquare: string;
+  portrait: string;
+  landscape: string;
+}
+
 export interface Event {
   id: string;
   name: string;
@@ -11,6 +18,7 @@ export interface Event {
   venue: string;
   featured: boolean;
   spotify_tracks: Track[];
+  event_images: EventImage;
   apple_music_tracks: Track[];
 }
 
