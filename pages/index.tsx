@@ -5,11 +5,13 @@ import { useListOfEvents } from "hooks";
 import type { GetStaticProps, NextPage } from "next";
 import type * as Api from "types/api";
 
+// TODO: move to config
 const pageSize = 12;
 
-// TODO: remove hard coded venue filter
+// TODO: venue filter
+// this should be a venue page
 const buildDataURL = (page: number, size = pageSize): string =>
-  `/events?page[number]=${page}&page[size]=${size}&filter[venues]=O2 Ritz`;
+  `/events?page[number]=${page}&page[size]=${size}`;
 
 interface Props {
   initialPage: number;

@@ -4,6 +4,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 dayjs.extend(localizedFormat);
 
+// map sensible locales to dayjs locales
 const mapping: Record<string, string> = {
   "en-US": "en",
   "en-GB": "en-gb",
