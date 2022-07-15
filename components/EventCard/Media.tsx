@@ -37,10 +37,14 @@ const Media: FC<PropsWithChildren<Props>> = ({
       <AspectRatio w="100%" ratio={375 / 225}>
         <Imgix
           sizes="33.3vw" // TODO: responsive sizes
+          className="lazyload"
           src={images.landscape}
-          htmlAttributes={{
-            alt: name,
+          attributeConfig={{
+            src: "data-src",
+            srcSet: "data-srcset",
+            sizes: "data-sizes",
           }}
+          htmlAttributes={{ alt: name }}
         />
       </AspectRatio>
       {audio && (
