@@ -17,7 +17,7 @@ interface Props {
 
 // TODO: page meta
 const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
-  const { events, loadMore } = useListOfEvents({
+  const { events, loadMore, isLoading, canLoadMore } = useListOfEvents({
     initialPage,
     fallbackData,
     buildDataURL,
@@ -26,7 +26,11 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
   return (
     <Container py={8} as={VStack}>
       <ListOfEvents events={events} />
-      <Button onClick={loadMore}>Load More</Button>
+      {canLoadMore && (
+        <Button isLoading={isLoading} onClick={loadMore}>
+          Load More
+        </Button>
+      )}
     </Container>
   );
 };

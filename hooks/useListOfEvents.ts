@@ -8,30 +8,33 @@ interface Options {
   buildDataURL: (page: number) => string;
 }
 
-// TODO: move
 export const useListOfEvents = ({
   initialPage,
   fallbackData,
   buildDataURL,
 }: Options) => {
-  const { data, size, setSize } = useSWRInfinite<Api.EventsResponse>(
-    (page) => buildDataURL(page + 1),
-    fetcher,
-    {
-      fallbackData,
-      initialSize: initialPage,
-    }
-  );
+  const { data, size, setSize, isValidating } =
+    useSWRInfinite<Api.EventsResponse>(
+      (page) => buildDataURL(page + 1),
+      fetcher,
+      {
+        fallbackData,
+        initialSize: initialPage,
+      }
+    );
+
+  const pages = data || [];
+  const canLoadMore = !!pages[pages.length - 1]?.links.next;
 
   return {
+    canLoadMore,
     loadMore: () => {
-      // TODO: if there is a next page
-      setSize(size + 1);
+      if (canLoadMore) {
+        setSize(size + 1);
+      }
     },
+    isLoading: isValidating,
     // flatten page data into list of events
-    events: (data || []).reduce<Api.Event[]>(
-      (events, { data }) => [...events, ...data],
-      []
-    ),
+    events: pages.reduce<Api.Event[]>((e, { data }) => [...e, ...data], []),
   };
 };
