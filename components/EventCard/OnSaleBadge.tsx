@@ -21,7 +21,7 @@ interface Props {
 }
 
 const OnSaleBadge: FC<Props> = ({ onSaleDate }) => {
-  const onSale = dayjs.utc(onSaleDate);
+  const onSale = dayjs(onSaleDate);
 
   // TODO: remove hard coded now
   if (

@@ -61,7 +61,7 @@ const Content: FC<Props> = ({
               {/* don't want to replace curfew in lineup because there are artists called Curfew! */}
               {!lineup.find(({ details }) => details.includes("Curfew")) && (
                 <ListItem>
-                  Curfew - <b>{dayjs.utc(endDate).format("LT")}</b>
+                  Curfew - <b>{dayjs(endDate).format("LT")}</b>
                 </ListItem>
               )}
             </List>
