@@ -7,7 +7,7 @@ interface Props {
   city?: string;
 }
 
-const EventCardHeader: FC<Props> = ({ name, venue, city }) => (
+const Header: FC<Props> = ({ name, venue, city }) => (
   <VStack spacing={0} align="start">
     <Text fontSize="xl" fontWeight="bold">
       {name}
@@ -17,4 +17,4 @@ const EventCardHeader: FC<Props> = ({ name, venue, city }) => (
   </VStack>
 );
 
-export default EventCardHeader;
+export default Header;

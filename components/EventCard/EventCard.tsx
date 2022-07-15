@@ -1,7 +1,7 @@
 import { VStack } from "@chakra-ui/react";
-import Content from "components/EventCard/EventCardContent";
-import Header from "components/EventCard/EventCardHeader";
-import Media from "components/EventCard/EventCardMedia";
+import Content from "components/EventCard/Content";
+import Header from "components/EventCard/Header";
+import Media from "components/EventCard/Media";
 import OnSaleBadge from "components/EventCard/OnSaleBadge";
 import { FC } from "react";
 import type * as Api from "types/api";

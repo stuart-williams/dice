@@ -23,7 +23,7 @@ interface Props {
   appleMusicTracks: Api.Track[];
 }
 
-const EventCardMedia: FC<PropsWithChildren<Props>> = ({
+const Media: FC<PropsWithChildren<Props>> = ({
   name,
   images,
   spotifyTracks,
@@ -47,4 +47,4 @@ const EventCardMedia: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-export default EventCardMedia;
+export default Media;

@@ -1,6 +1,6 @@
-import { Button, Container, VStack } from "@chakra-ui/react";
+import { Button, Container, SimpleGrid, VStack } from "@chakra-ui/react";
 import { apiClient } from "common/http";
-import ListOfEvents from "components/ListOfEvents";
+import EventCard from "components/EventCard";
 import { useListOfEvents } from "hooks";
 import type { GetStaticProps, NextPage } from "next";
 import type * as Api from "types/api";
@@ -9,7 +9,6 @@ import type * as Api from "types/api";
 const pageSize = 12;
 
 // TODO: venue filter
-// this should be a venue page
 const buildDataURL = (page: number, size = pageSize): string =>
   `/events?page[number]=${page}&page[size]=${size}`;
 
@@ -34,9 +33,18 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
       align="stretch"
       maxW="container.lg"
     >
-      <ListOfEvents events={events} />
+      <SimpleGrid spacing={8} columns={{ base: 1, sm: 2, lg: 3 }}>
+        {events.map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </SimpleGrid>
       {canLoadMore && (
-        <Button isLoading={isLoading} onClick={loadMore}>
+        <Button
+          alignSelf="center"
+          colorScheme="blue"
+          onClick={loadMore}
+          isLoading={isLoading}
+        >
           Load More
         </Button>
       )}

@@ -31,7 +31,7 @@ interface Props {
   lineup: Api.LineupItem[];
 }
 
-const EventCardContent: FC<Props> = ({
+const Content: FC<Props> = ({
   lineup,
   endDate,
   tickets,
@@ -80,4 +80,4 @@ const EventCardContent: FC<Props> = ({
   );
 };
 
-export default EventCardContent;
+export default Content;
