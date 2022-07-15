@@ -1,7 +1,7 @@
 import { AspectRatio, Box, Center, chakra, Icon } from "@chakra-ui/react";
-import Image from "next/image";
 import { FC, PropsWithChildren } from "react";
 import { BiPlay as PlayIcon } from "react-icons/bi";
+import Imgix from "react-imgix";
 import type * as Api from "types/api";
 
 const Play = chakra(Center, {
@@ -35,7 +35,13 @@ const Media: FC<PropsWithChildren<Props>> = ({
   return (
     <Box w="100%" position="relative" bg="black">
       <AspectRatio w="100%" ratio={375 / 225}>
-        <Image alt={name} layout="fill" src={images.landscape} />
+        <Imgix
+          sizes="33.3vw" // TODO: responsive sizes
+          src={images.landscape}
+          htmlAttributes={{
+            alt: name,
+          }}
+        />
       </AspectRatio>
       {audio && (
         <Play>
