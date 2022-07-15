@@ -11,12 +11,19 @@ export interface EventImage {
   landscape: string;
 }
 
+export interface City {
+  id: string;
+  name: string;
+}
+
 export interface Event {
   id: string;
   name: string;
   date: string;
   venue: string;
+  cities: City[];
   featured: boolean;
+  sale_start_date: string;
   spotify_tracks: Track[];
   event_images: EventImage;
   apple_music_tracks: Track[];

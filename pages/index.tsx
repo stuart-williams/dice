@@ -7,8 +7,9 @@ import type * as Api from "types/api";
 
 const pageSize = 12;
 
+// TODO: remove hard coded venue filter
 const buildDataURL = (page: number, size = pageSize): string =>
-  `/events?page[number]=${page}&page[size]=${size}`;
+  `/events?page[number]=${page}&page[size]=${size}&filter[venues]=O2 Ritz`;
 
 interface Props {
   initialPage: number;
