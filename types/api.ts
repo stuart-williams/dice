@@ -6,6 +6,7 @@ export interface Track {
 
 export interface Event {
   id: string;
+  name: string;
   date: string;
   venue: string;
   featured: boolean;
@@ -13,10 +14,12 @@ export interface Event {
   apple_music_tracks: Track[];
 }
 
+export interface Links {
+  next: string;
+  self: string;
+}
+
 export interface EventsResponse {
+  links: Links;
   data: Event[];
-  links: {
-    next: string;
-    self: string;
-  };
 }
