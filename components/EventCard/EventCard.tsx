@@ -8,9 +8,10 @@ import type * as Api from "types/api";
 
 interface Props {
   event: Api.Event;
+  priority?: boolean;
 }
 
-const EventCard: FC<Props> = ({ event }) => {
+const EventCard: FC<Props> = ({ event, priority }) => {
   const {
     name,
     venue,
@@ -32,6 +33,7 @@ const EventCard: FC<Props> = ({ event }) => {
       <Media
         name={name}
         images={images}
+        priority={priority}
         spotifyTracks={spotifyTracks}
         appleMusicTracks={appleMusicTracks}
       >

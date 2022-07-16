@@ -18,6 +18,7 @@ const Play = chakra(Center, {
 
 interface Props {
   name: string;
+  priority?: boolean;
   images: Api.EventImage;
   spotifyTracks: Api.Track[];
   appleMusicTracks: Api.Track[];
@@ -26,6 +27,7 @@ interface Props {
 const Media: FC<PropsWithChildren<Props>> = ({
   name,
   images,
+  priority,
   spotifyTracks,
   appleMusicTracks,
   children,
@@ -39,6 +41,7 @@ const Media: FC<PropsWithChildren<Props>> = ({
         // aspect ratio
         width={375}
         height={225}
+        priority={priority}
         layout="responsive"
         src={images.landscape}
       />

@@ -1,10 +1,4 @@
-import {
-  Button,
-  Container,
-  SimpleGrid,
-  VStack,
-  useTheme,
-} from "@chakra-ui/react";
+import { Button, Container, SimpleGrid, VStack } from "@chakra-ui/react";
 import { apiClient } from "common/http";
 import EventCard from "components/EventCard";
 import { useListOfEvents } from "hooks";
@@ -31,9 +25,6 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
     buildDataURL,
   });
 
-  const theme = useTheme();
-  console.log(theme);
-
   return (
     <Container
       py={8}
@@ -43,8 +34,8 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
       maxW="container.lg"
     >
       <SimpleGrid spacing={8} columns={{ base: 1, sm: 2, lg: 3 }}>
-        {events.map((event) => (
-          <EventCard key={event.id} event={event} />
+        {events.map((event, i) => (
+          <EventCard key={event.id} event={event} priority={i < pageSize / 2} />
         ))}
       </SimpleGrid>
       {canLoadMore && (
