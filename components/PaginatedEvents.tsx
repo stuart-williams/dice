@@ -11,14 +11,12 @@ import { FC } from "react";
 import type * as Api from "types/api";
 
 interface Props {
-  pageSize: number;
   initialPage: number;
   fallbackData: Api.EventsResponse[];
   buildDataURL: (page: number) => string;
 }
 
 const PaginatedEvents: FC<Props> = ({
-  pageSize,
   initialPage,
   fallbackData,
   buildDataURL,
@@ -48,7 +46,7 @@ const PaginatedEvents: FC<Props> = ({
             event={event}
             image={{
               sizes: imgSizes,
-              priority: i < pageSize / 2,
+              priority: i < 6,
             }}
           />
         ))}

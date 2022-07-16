@@ -26,7 +26,6 @@ const VenuePage: NextPage<Props> = ({ name, events }) => {
       </Head>
       <PaginatedEvents
         {...events}
-        pageSize={pageSize}
         buildDataURL={(page) => buildDataURL(page, pageSize, name)}
       />
     </>
