@@ -36,13 +36,13 @@ const Media: FC<PropsWithChildren<Props>> = ({
     <Box w="100%" position="relative" bg="black">
       <AspectRatio w="100%" ratio={375 / 225}>
         <Imgix
-          sizes="33.3vw" // TODO: responsive sizes
+          sizes="auto"
           className="lazyload"
           src={images.landscape}
           attributeConfig={{
             src: "data-src",
-            srcSet: "data-srcset",
             sizes: "data-sizes",
+            srcSet: "data-srcset",
           }}
           htmlAttributes={{ alt: name }}
         />
