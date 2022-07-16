@@ -8,10 +8,13 @@ import type * as Api from "types/api";
 
 interface Props {
   event: Api.Event;
-  priority?: boolean;
+  image: {
+    sizes: string;
+    priority: boolean;
+  };
 }
 
-const EventCard: FC<Props> = ({ event, priority }) => {
+const EventCard: FC<Props> = ({ event, image }) => {
   const {
     name,
     venue,
@@ -31,9 +34,9 @@ const EventCard: FC<Props> = ({ event, priority }) => {
   return (
     <VStack align="start">
       <Media
+        {...image}
         name={name}
         images={images}
-        priority={priority}
         spotifyTracks={spotifyTracks}
         appleMusicTracks={appleMusicTracks}
       >

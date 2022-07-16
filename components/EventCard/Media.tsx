@@ -1,4 +1,4 @@
-import { Box, Center, chakra, Icon, useTheme } from "@chakra-ui/react";
+import { Box, Center, chakra, Icon } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC, PropsWithChildren } from "react";
 import { BiPlay as PlayIcon } from "react-icons/bi";
@@ -18,7 +18,8 @@ const Play = chakra(Center, {
 
 interface Props {
   name: string;
-  priority?: boolean;
+  sizes: string;
+  priority: boolean;
   images: Api.EventImage;
   spotifyTracks: Api.Track[];
   appleMusicTracks: Api.Track[];
@@ -26,23 +27,14 @@ interface Props {
 
 const Media: FC<PropsWithChildren<Props>> = ({
   name,
+  sizes,
   images,
   priority,
   spotifyTracks,
   appleMusicTracks,
   children,
 }) => {
-  const theme = useTheme();
-  const maxW = theme.sizes.container.lg;
-  const { sm, lg } = theme.breakpoints;
   const audio = !!(spotifyTracks.length + appleMusicTracks.length);
-
-  const sizes = [
-    `(min-width: ${maxW}) calc(${maxW} / 3)`,
-    `(min-width: ${lg}) calc(100vw / 3)`,
-    `(min-width: ${sm}) calc(100vw / 2)`,
-    "100vw",
-  ];
 
   return (
     <Box w="100%" position="relative" bg="black">
@@ -51,10 +43,10 @@ const Media: FC<PropsWithChildren<Props>> = ({
         // aspect ratio
         width={375}
         height={225}
+        sizes={sizes}
         priority={priority}
         layout="responsive"
         src={images.landscape}
-        sizes={sizes.join(",")}
       />
       {audio && (
         <Play>
