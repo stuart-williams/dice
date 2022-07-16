@@ -33,7 +33,7 @@ const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
       align="stretch"
       maxW="container.lg"
     >
-      <SimpleGrid spacing={8} minChildWidth="260px">
+      <SimpleGrid spacing={8} columns={{ base: 1, sm: 2, lg: 3 }}>
         {events.map((event, i) => (
           <EventCard key={event.id} event={event} priority={i < pageSize / 2} />
         ))}
