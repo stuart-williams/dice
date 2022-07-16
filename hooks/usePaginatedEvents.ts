@@ -12,7 +12,7 @@ interface Options {
  * Abstract the logic to populate swr with the data used during SSR and
  * handle infinite pagination.
  */
-export const useListOfEvents = ({
+export const usePaginatedEvents = ({
   initialPage,
   fallbackData,
   buildDataURL,
@@ -28,12 +28,12 @@ export const useListOfEvents = ({
     );
 
   const pages = data || [];
-  const canLoadMore = !!pages[pages.length - 1]?.links.next;
+  const hasMore = !!pages[pages.length - 1]?.links.next;
 
   return {
-    canLoadMore,
+    hasMore,
     loadMore: () => {
-      if (canLoadMore) {
+      if (hasMore) {
         setSize(size + 1);
       }
     },

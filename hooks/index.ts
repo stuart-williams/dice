@@ -1,3 +1,2 @@
-export * from "./useEventCardLayout";
 export * from "./useFormatTicketPrice";
-export * from "./useListOfEvents";
+export * from "./usePaginatedEvents";
