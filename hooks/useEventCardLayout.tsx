@@ -26,9 +26,9 @@ export const useEventCardLayout = () => {
     },
     grid: {
       columns: {
-        base: 1,
-        sm: 2,
         lg: 3,
+        sm: 2,
+        base: 1,
       },
     },
     image: {

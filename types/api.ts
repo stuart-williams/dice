@@ -19,8 +19,6 @@ export interface LineupItem {
 }
 
 export interface TicketPrice {
-  fees: number;
-  total: number;
   face_value: number;
 }
 
