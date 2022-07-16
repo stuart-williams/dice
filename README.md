@@ -2,9 +2,9 @@
 
 Set up environment variables:
 
-````base
+```bash
 cp .env.example .env.local
-``
+```
 
 First, run the development server:
 
