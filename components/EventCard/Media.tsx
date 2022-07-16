@@ -1,4 +1,5 @@
 import { Box, Center, chakra, Icon } from "@chakra-ui/react";
+import { dataTestId } from "common/test-utils";
 import Image from "next/image";
 import { FC, PropsWithChildren } from "react";
 import { BiPlay as PlayIcon } from "react-icons/bi";
@@ -49,7 +50,7 @@ const Media: FC<PropsWithChildren<Props>> = ({
         src={images.landscape}
       />
       {audio && (
-        <Play>
+        <Play {...dataTestId("play")}>
           <Icon as={PlayIcon} boxSize="40px" />
         </Play>
       )}

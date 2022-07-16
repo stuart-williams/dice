@@ -1,13 +1,10 @@
+// Only typing the stuff I need atm
+
 export interface Track {
   title: string;
-  open_url: string;
-  preview_url: string;
 }
 
 export interface EventImage {
-  brand?: string;
-  aquare: string;
-  portrait: string;
   landscape: string;
 }
 
