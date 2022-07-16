@@ -7,5 +7,9 @@ export const apiClient = axios.create({
   },
 });
 
+/**
+ * Fetcher for swr:
+ * https://swr.vercel.app/docs/data-fetching#axios
+ */
 export const fetcher = (url: string) =>
   apiClient.get(url).then(({ data }) => data);

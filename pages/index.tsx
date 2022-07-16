@@ -20,6 +20,7 @@ interface Props {
 // TODO: page meta
 const Page: NextPage<Props> = ({ initialPage, fallbackData }) => {
   const layout = useEventCardLayout();
+
   const { events, loadMore, isLoading, canLoadMore } = useListOfEvents({
     initialPage,
     fallbackData,

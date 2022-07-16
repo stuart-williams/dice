@@ -1,3 +1,7 @@
+/**
+ * dayjs - nice small alternative to moment + does localisation etc.
+ * https://day.js.org/
+ */
 import dayjs from "dayjs";
 import "dayjs/locale/en-gb";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -8,13 +12,15 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 
+const defaultLocale = "en-gb";
+
 // map sensible locales to dayjs locales
-const mapping: Record<string, string> = {
+const localeMap: Record<string, string> = {
   "en-US": "en",
   "en-GB": "en-gb",
 };
 
 export const setLocale = (locale: string) =>
-  dayjs.locale(mapping[locale] || "en-gb");
+  dayjs.locale(localeMap[locale] || defaultLocale);
 
 export default dayjs;

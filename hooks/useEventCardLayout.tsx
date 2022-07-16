@@ -1,5 +1,12 @@
 import { useTheme } from "@chakra-ui/react";
 
+/**
+ * Serving properly sized images for the device / screen size is super important
+ * for performance. The "sizes" attribute of the event card img is directly related to the grid
+ * the cards sit within. This hook abstracts the layout logic away from any particular component.
+ * Use values from the theme so that breakpoints etc. can be configured at theme level
+ * without breaking responsive images.
+ */
 export const useEventCardLayout = () => {
   const theme = useTheme();
   const { sm, lg } = theme.breakpoints;

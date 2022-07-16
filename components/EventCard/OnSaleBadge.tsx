@@ -10,6 +10,7 @@ const OnSale = chakra(Badge, {
     bottom: 2,
     color: "white",
     fontSize: "0.8em",
+    whiteSpace: "normal",
     bg: "blackAlpha.900",
     position: "absolute",
     textTransform: "none",

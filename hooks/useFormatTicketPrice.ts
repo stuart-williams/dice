@@ -1,15 +1,17 @@
 import { useRouter } from "next/router";
 import type * as Api from "types/api";
 
+/**
+ * Function to format ticket prices in the correct currency.
+
+ * At TickX we are required by our US clients to show prices inc. fees etc. 
+ * as early as possible so I expect this function would be extended in future 
+ * to accomidate stuff like that.
+ */
 export const useFormatTicketPrice = () => {
   const { locale } = useRouter();
 
   return (price: Api.TicketPrice, currency = "GBP") => {
-    /**
-     * at TickX we are required by our US clients (and I guess law) to show prices
-     * as early as possible inc. fees, taxes etc. hence the ticket price object.
-     */
-
     if (!price.face_value) {
       return "Free";
     }

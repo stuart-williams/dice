@@ -8,6 +8,10 @@ interface Options {
   buildDataURL: (page: number) => string;
 }
 
+/**
+ * Abstract the logic to populate swr with the data used during SSR and
+ * handle infinite pagination.
+ */
 export const useListOfEvents = ({
   initialPage,
   fallbackData,
