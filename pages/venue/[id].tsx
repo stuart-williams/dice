@@ -1,63 +1,113 @@
+import { Container, Heading, useTheme, VStack } from "@chakra-ui/react";
+import { AxiosResponse } from "axios";
 import { apiClient } from "common/http";
 import PaginatedEvents from "components/PaginatedEvents";
+import get from "lodash.get";
 import type { GetServerSideProps, NextPage } from "next";
+import Error from "next/error";
 import Head from "next/head";
 import type * as Api from "types/api";
 
-// TODO: move to config
-const pageSize = 12;
-
-const buildDataURL = (page: number, size: number, venue: string): string =>
-  `/events?page[number]=${page}&page[size]=${size}&filter[venues]=${venue}`;
+// hard code page size for now
+const buildDataURL = (page: number, venue: string): string =>
+  `/events?page[number]=${page}&page[size]=12&filter[venues]=${venue}`;
 
 interface Props {
-  name: string;
-  events: {
-    initialPage: number;
-    fallbackData: Api.EventsResponse[];
+  statusCode?: number;
+  venue?: {
+    name: string;
+    events: {
+      initialPage: number;
+      fallbackData: Api.EventsResponse[];
+    };
   };
 }
 
-const VenuePage: NextPage<Props> = ({ name, events }) => {
+const VenuePage: NextPage<Props> = ({ venue, statusCode }) => {
+  const theme = useTheme();
+  const maxW = theme.sizes.container.lg;
+
+  if (statusCode || !venue) {
+    return <Error statusCode={statusCode || 404} />;
+  }
+
   return (
     <>
       <Head>
-        <title>{name} | Dice</title>
+        <title>{venue.name} | Dice</title>
       </Head>
-      <PaginatedEvents
-        {...events}
-        buildDataURL={(page) => buildDataURL(page, pageSize, name)}
-      />
+      <Container py={8} spacing={8} as={VStack} maxW={maxW} align="stretch">
+        <Heading as="h1" size="lg">
+          Upcoming events at {venue.name}
+        </Heading>
+        <PaginatedEvents
+          maxW={maxW}
+          {...venue.events}
+          buildDataURL={(page) => buildDataURL(page, venue.name)}
+        />
+      </Container>
     </>
   );
+};
+
+interface Venue {
+  name: string;
+}
+
+const mockFetchVenue = async (id: string): Promise<AxiosResponse<Venue>> => {
+  const mockVenues: Record<string, Venue> = {
+    "o2-ritz": {
+      name: "O2 Ritz",
+    },
+    "albert-hall-manchester": {
+      name: "Albert Hall Manchester",
+    },
+  };
+
+  const venue = mockVenues[id];
+
+  if (venue) {
+    return { data: venue } as AxiosResponse;
+  }
+
+  return Promise.reject({
+    response: {
+      status: 404,
+    },
+  } as unknown as AxiosResponse);
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
+  const page = 1; // hard code for now
   const id = context.query.id as string;
-  const page = 1; // TODO: get from url
-  const size = page * pageSize;
 
-  // fetch venue data
-  // TODO: not found
-  const venue = {
-    name: "O2 Ritz",
-  };
+  try {
+    const { data: venue } = await mockFetchVenue(id);
 
-  const { data } = await apiClient.get<Api.EventsResponse>(
-    buildDataURL(page, size, venue.name)
-  );
+    const { data: events } = await apiClient.get<Api.EventsResponse>(
+      buildDataURL(page, venue.name)
+    );
 
-  return {
-    props: {
-      ...venue,
-      events: {
-        initialPage: page,
-        fallbackData: [data],
+    return {
+      props: {
+        venue: {
+          ...venue,
+          events: {
+            initialPage: page,
+            fallbackData: [events],
+          },
+        },
       },
-    },
-  };
+    };
+  } catch (error) {
+    return {
+      props: {
+        statusCode: get(error, "response.status", 500),
+      },
+    };
+  }
 };
 
 export default VenuePage;
