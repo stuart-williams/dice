@@ -54,6 +54,7 @@ interface Venue {
   name: string;
 }
 
+// Quick and dirty mock a venue endpoint
 const mockFetchVenue = async (id: string): Promise<AxiosResponse<Venue>> => {
   const mockVenues: Record<string, Venue> = {
     "o2-ritz": {
@@ -61,6 +62,9 @@ const mockFetchVenue = async (id: string): Promise<AxiosResponse<Venue>> => {
     },
     "albert-hall-manchester": {
       name: "Albert Hall Manchester",
+    },
+    "o2-academy-brixton": {
+      name: "O2 Academy Brixton",
     },
   };
 
