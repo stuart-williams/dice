@@ -34,7 +34,7 @@ const VenuePage: NextPage<Props> = ({ venue, statusCode }) => {
   return (
     <>
       <Head>
-        <title>{venue.name} | Dice</title>
+        <title>{`${venue.name} | Dice`}</title>
       </Head>
       <Container py={8} spacing={8} as={VStack} maxW={maxW} align="stretch">
         <Heading as="h1" size="lg">
